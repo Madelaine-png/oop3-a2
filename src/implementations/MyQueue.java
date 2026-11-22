@@ -25,7 +25,177 @@ import utilities.QueueADT;
  * as {@link String} throughout this class and its implementations.
  * </p>
  */
-public class MyQueue implements QueueADT
-{
-    
+public class MyQueue implements QueueADT {
+
+    /** List that stores the queue items. */
+    private MyDLL list;
+
+    /**
+     * Makes an empty queue.
+     */
+    public MyQueue() {
+        list = new MyDLL();
+    }
+
+    /**
+     * Adds an item to the back.
+     *
+     * @param toAdd item to add
+     * @throws NullPointerException if toAdd is null
+     */
+    @Override
+    public void enqueue(String toAdd) throws NullPointerException {
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot enqueue null");
+        }
+        list.add(toAdd);
+    }
+
+    /**
+     * Removes and returns the front item.
+     *
+     * @return the front item
+     * @throws EmptyQueueException if the queue is empty
+     */
+    @Override
+    public String dequeue() throws EmptyQueueException {
+        if (list.isEmpty()) {
+            throw new EmptyQueueException("Queue is empty");
+        }
+        return list.remove(0);
+    }
+
+    /**
+     * Returns the front item without removing it.
+     *
+     * @return the front item
+     * @throws EmptyQueueException if the queue is empty
+     */
+    @Override
+    public String peek() throws EmptyQueueException {
+        if (list.isEmpty()) {
+            throw new EmptyQueueException("Queue is empty");
+        }
+        return list.get(0);
+    }
+
+    /**
+     * Removes all items.
+     */
+    @Override
+    public void dequeueAll() {
+        list.clear();
+    }
+
+    /**
+     * Checks if the queue is empty.
+     *
+     * @return true if empty
+     */
+    @Override
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    /**
+     * Checks if an item is in the queue.
+     *
+     * @param toFind item to look for
+     * @return true if found
+     * @throws NullPointerException if toFind is null
+     */
+    @Override
+    public boolean contains(String toFind) throws NullPointerException {
+        if (toFind == null) {
+            throw new NullPointerException("Cannot search for null");
+        }
+        return list.contains(toFind);
+    }
+
+    /**
+     * Finds an item's position from the front (front is 1).
+     *
+     * @param toFind item to look for
+     * @return position of the item, or -1 if not found
+     */
+    @Override
+    public int search(String toFind) {
+        if (toFind == null) {
+            return -1;
+        }
+
+        int pos = 1;
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+            if (toFind.equals(it.next())) {
+                return pos;
+            }
+            pos++;
+        }
+        return -1;
+    }
+
+    /**
+     * Returns an iterator from front to back.
+     *
+     * @return iterator over the queue
+     */
+    @Override
+    public Iterator iterator() {
+        return list.iterator();
+    }
+
+    /**
+     * Checks if two queues have the same items in the same order.
+     *
+     * @param that queue to compare with
+     * @return true if equal
+     * @throws NullPointerException if that is null
+     */
+    @Override
+    public boolean equals(QueueADT that) {
+        if (that == null) {
+            throw new NullPointerException("Cannot compare to null queue");
+        }
+        if (this == that) {
+            return true;
+        }
+        if (this.size() != that.size()) {
+            return false;
+        }
+
+        Iterator mine = this.iterator();
+        Iterator theirs = that.iterator();
+        while (mine.hasNext() && theirs.hasNext()) {
+            if (!mine.next().equals(theirs.next())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Puts the queue items into an array, front to back.
+     *
+     * @param holder array to fill
+     * @return array of the items
+     * @throws NullPointerException if holder is null
+     */
+    @Override
+    public String[] toArray(String[] holder) throws NullPointerException {
+        if (holder == null) {
+            throw new NullPointerException("Holder array cannot be null");
+        }
+        return list.toArray(holder);
+    }
+
+    /**
+     * Returns the number of items.
+     *
+     * @return the size
+     */
+    @Override
+    public int size() {
+        return list.size();
+    }
 }
