@@ -22,5 +22,80 @@ package implementations;
  */
 public class MyDLLNode
 {
+    // Fields
 
+    /** The String element stored in this node. */
+    private String element;
+
+    /** The node before this one */
+    private MyDLLNode pred;
+
+    /** The node after this one */
+    private MyDLLNode succ;
+
+
+    // Constructors
+
+    /**
+     * Creates a node holding {@code element} with no neighbours.
+     *
+     * @param element the String to store
+     */
+    public MyDLLNode( String element )
+    {
+        this( element, null, null );
+    }
+
+    /**
+     * Creates a node holding an element, linked to the given neighbours.
+     *
+     * @param element the String to store
+     * @param pred    the node before this one
+     * @param succ    the node after this one 
+     */
+    public MyDLLNode( String element, MyDLLNode pred, MyDLLNode succ )
+    {
+        this.element = element;
+        this.pred = pred;
+        this.succ = succ;
+    }
+
+
+    // Getters and setters
+
+    /** @return the element stored in this node */
+    public String getElement()
+    {
+        return element;
+    }
+
+    /** @param element the new element to store in this node */
+    public void setElement( String element )
+    {
+        this.element = element;
+    }
+
+    /** @return the previous node */
+    public MyDLLNode getPred()
+    {
+        return pred;
+    }
+
+    /** @param pred the new previous node */
+    public void setPred( MyDLLNode pred )
+    {
+        this.pred = pred;
+    }
+
+    /** @return the next node */
+    public MyDLLNode getSucc()
+    {
+        return succ;
+    }
+
+    /** @param succ the new next node */
+    public void setSucc( MyDLLNode succ )
+    {
+        this.succ = succ;
+    }
 }
