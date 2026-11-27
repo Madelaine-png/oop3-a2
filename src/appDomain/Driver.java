@@ -34,7 +34,26 @@ public class Driver {
 				}
 			}
 		}
-		//person 3
+		while(!stack.isEmpty()) {
+			errorQ.enqueue(stack.pop());
+		}
+
+		if(errorQ.isEmpty() && extrasQ.isEmpty()) {
+			System.out.println("No syntax errors found.");
+		} else {
+			if(!errorQ.isEmpty()) {
+				System.out.println("Unmatched / out-of-place brackets (errorQ):");
+				while(!errorQ.isEmpty()) {
+					System.out.println("  " + errorQ.dequeue());
+				}
+			}
+			if(!extrasQ.isEmpty()) {
+				System.out.println("Extra closing brackets (extrasQ):");
+				while(!extrasQ.isEmpty()) {
+					System.out.println("  " + extrasQ.dequeue());
+				}
+			}
+		}
 		
 	}
 
